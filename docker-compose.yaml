@@ -1,0 +1,20 @@
+version: '3'
+services:
+  alfa:
+    container_name: alfa
+    image: alfa
+    ports:
+      - 8080:80
+  beta:
+    container_name: beta
+    image: beta
+    ports:
+      - 8081:80
+  # nginx:
+  #   container_name: nginx
+  #   image: nginx-php
+  #   depends_on:
+  #   - beta
+  #   - alpha
+  #   ports:
+  #     - 9000:80
