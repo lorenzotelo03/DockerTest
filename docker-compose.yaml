@@ -10,11 +10,30 @@ services:
     image: beta
     ports:
       - 8081:80
-  # nginx:
-  #   container_name: nginx
-  #   image: nginx-php
-  #   depends_on:
-  #   - beta
-  #   - alpha
-  #   ports:
-  #     - 9000:80
+  sqlDb:
+    container_name: sqlDb
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: Db
+      MYSQL_USER: lorenzotelo03
+      MYSQL_PASSWORD: mypassword
+    volumes: 
+        - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - 8082:80
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8080
+  nginx:
+    build:
+      context: nginx/
+    ports:
+      - 8000:80
+    depends_on:
+      - alfa
+      - beta
+    
