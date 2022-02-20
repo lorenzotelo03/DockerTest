@@ -2,8 +2,8 @@
 session_set_cookie_params(3600);
 session_start();
 $connection = mysql_connect("sqlDb", "lorenzotelo03", "mypassword");
+$db = mysql_select_db("Db", $connection);
 $utenti = mysql_query("select * from LoginData", $connection);
-//$utenti = json_decode(file_get_contents("teachers.json"));
 if(isset($_POST["userName"])&&isset($_POST["password"])){
     $userName = $_POST["userName"];
     $password = $_POST["password"];

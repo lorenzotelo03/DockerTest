@@ -3,3 +3,4 @@ CREATE TABLE LoginData (
     username varchar(255),
     uPassword varchar(255)
 );
+

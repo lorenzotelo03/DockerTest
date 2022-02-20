@@ -1,5 +1,9 @@
 <?php 
-$utenti = json_decode(file_get_contents("teachers.json"));
+
+$connection = mysql_connect("sqlDb", "root", "root");
+$db = mysql_select_db("Db", $connection);
+$utenti = mysql_query("select * from LoginData", $connection);
+
 if(isset($_POST["userName"])&&isset($_POST["password"])){
     $userName = $_POST["userName"];
     $password = $_POST["password"];
@@ -19,7 +23,7 @@ if(isset($_POST["userName"])&&isset($_POST["password"])){
         $utente -> userName = $userName;
         $utente -> password = $password;
         $sql = "INSERT INTO LoginData (username, uPassword) VALUES (".$userName.", ".$password.");";
-            if (mysqli_query($sql)) {
+            if (mysql_query($sql)) {
                 echo "New record created successfully";
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
